@@ -1,0 +1,42 @@
+# Config file for collectd(1).
+#
+# Some plugins need additional configuration and are disabled by default.
+# Please read collectd.conf(5) for details.
+#
+# You should also read /usr/share/doc/collectd-core/README.Debian.plugins
+# before enabling any more plugins.
+
+FQDNLookup true
+LoadPlugin logfile
+
+<Plugin logfile>
+	LogLevel "info"
+	File STDOUT
+	Timestamp true
+	PrintSeverity true
+</Plugin>
+
+LoadPlugin network
+LoadPlugin python
+
+<Plugin network>
+	<Server "influxdb" "25826">
+		SecurityLevel Encrypt
+		Username "collectd"
+		Password "123456AB"
+	</Server>
+	ReportStats false
+</Plugin>
+
+<Plugin python>
+	Import "fritzcollectd"
+	<Module fritzcollectd>
+		Address "fritz.box"
+		Port 49000
+		User "collectd"
+		Password "123456Ab"
+		Hostname "FritzBox"
+		Instance "1"
+		Verbose "False"
+	</Module>
+</Plugin>
