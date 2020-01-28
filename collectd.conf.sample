@@ -7,6 +7,8 @@
 # before enabling any more plugins.
 
 FQDNLookup true
+Interval 20
+
 LoadPlugin logfile
 
 <Plugin logfile>
