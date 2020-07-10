@@ -14,7 +14,7 @@ RUN apt-get update -q \
     python-wheel \
     zlib1g \
     zlib1g-dev \
-  && pip install fritzcollectd \
+  && pip install --no-cache-dir --progress-bar off fritzcollectd \
   && apt-get autoremove --purge -y \
     gcc \
     libxslt-dev \
